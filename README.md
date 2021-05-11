@@ -6,9 +6,9 @@
 
 ## Installation
 
-- Clone this repo
-- Run make install to install dependencies
-- Run make dev to start the project
-- Play on [http://localhost:3000/](http://localhost:3000/)
+-   Clone this repo
+-   Run make install to install dependencies
+-   Run make dev to start the project
+-   Play on [http://localhost:3000/](http://localhost:3000/)
 
 > Type make help to list all commands available
