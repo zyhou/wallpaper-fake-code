@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-function App(): ReactElement {
+export function App(): ReactElement {
     return (
         <div>
             <header>
@@ -9,5 +9,3 @@ function App(): ReactElement {
         </div>
     );
 }
-
-export default App;
