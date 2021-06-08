@@ -1,3 +1,6 @@
 {
-    "extends": ["zyhou/presets/typescript-react"]
+    "extends": ["zyhou/presets/typescript-react"],
+    "rules": {
+        "jsx-a11y/no-onchange": 0
+    }
 }

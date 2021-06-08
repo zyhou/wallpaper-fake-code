@@ -1,9 +1,35 @@
-import { ReactElement } from 'react';
+import React from 'react';
 
 import { DarkModeButton } from './DarkModeButton';
 import { SelectThemes } from './SelectThemes';
+import { Wallpaper } from './Wallpaper';
+import type { Theme } from './SelectThemes';
 
-export function App(): ReactElement {
+export function App(): React.ReactElement {
+    const canvasReference = React.useRef<HTMLCanvasElement>(null);
+    const [theme, setTheme] = React.useState<Theme>({
+        name: '3024 Day',
+        red: '#db2d20',
+        green: '#01a252',
+        white: '#a5a2a2',
+        brightRed: '#e8bbd0',
+        brightGreen: '#3a3432',
+        background: '#f7f7f7',
+    });
+
+    const handleOnClick = () => {
+        if (!canvasReference.current) {
+            return;
+        }
+
+        const link = document.createElement('a');
+        link.download = `wallpaper-code.png`;
+        link.href = canvasReference.current.toDataURL('image/png');
+        document.body.append(link);
+        link.click();
+        link.remove();
+    };
+
     return (
         <div className="bg-white dark:bg-gray-900">
             <header className="text-gray-600 body-font">
@@ -34,7 +60,13 @@ export function App(): ReactElement {
                 </div>
             </header>
             <main>
-                <SelectThemes />
+                <section>
+                    <SelectThemes setTheme={setTheme} />
+                    <button onClick={handleOnClick}>Download Wallpaper</button>
+                </section>
+                <section className="flex bg-gray-900 dark:bg-white">
+                    <Wallpaper canvasReference={canvasReference} theme={theme} />
+                </section>
             </main>
             <footer></footer>
         </div>

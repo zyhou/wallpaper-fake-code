@@ -1,8 +1,44 @@
-import { ReactElement } from 'react';
+import React from 'react';
 
-export function SelectThemes(): ReactElement {
+export type Theme = {
+    name: string;
+    background: string;
+    red: string;
+    brightRed: string;
+    green: string;
+    brightGreen: string;
+    white: string;
+};
+
+export type Themes = Theme[];
+
+type Properties = {
+    setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
+
+export function SelectThemes({ setTheme }: Properties): React.ReactElement {
+    const [themes, setThemes] = React.useState<Themes>([]);
+
+    React.useEffect(() => {
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        async function getThemes() {
+            import('./themes.json').then((importThemes) => {
+                setThemes(importThemes.default);
+            });
+        }
+
+        getThemes();
+    }, []);
+
+    const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const theme = themes.find((theme) => theme.name === event.target.value);
+        if (theme) {
+            setTheme(theme);
+        }
+    };
+
     return (
-        <div className="mt-12 mx-auto w-5/6 dark:text-white flex">
+        <div className="mt-12 mx-auto w-2/6 flex dark:text-white">
             <div className="font-medium pb-2 flex">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -20,25 +56,18 @@ export function SelectThemes(): ReactElement {
                 </svg>
                 Blend Mode
             </div>
-            <select className="w-full form-select px-4 py-3 rounded-lg text-gray-900">
-                <option value="mix-blend-normal">Normal</option>
-                <option selected value="mix-blend-overlay">
-                    Overlay
-                </option>
-                <option value="mix-blend-multiply">Multiply</option>
-                <option value="mix-blend-screen">Screen</option>
-                <option value="mix-blend-darken">Darken</option>
-                <option value="mix-blend-lighten">Lighten</option>
-                <option value="mix-blend-color-dodge">Color Dodge</option>
-                <option value="mix-blend-color-burn">Color Burn</option>
-                <option value="mix-blend-hard-light">Hard Light</option>
-                <option value="mix-blend-soft-light">Soft Light</option>
-                <option value="mix-blend-difference">Difference</option>
-                <option value="mix-blend-exclusion">Exclusion</option>
-                <option value="mix-blend-hue">Hue</option>
-                <option value="mix-blend-saturation">Saturation</option>
-                <option value="mix-blend-color">Color</option>
-                <option value="mix-blend-luminosity">Luminosity</option>
+            <select
+                className="w-full form-select px-4 py-3 rounded-lg text-gray-900"
+                onChange={handleOnChange}
+            >
+                {themes &&
+                    themes.map((theme: Theme) => {
+                        return (
+                            <option key={theme.name} value={theme.name}>
+                                {theme.name}
+                            </option>
+                        );
+                    })}
             </select>
         </div>
     );

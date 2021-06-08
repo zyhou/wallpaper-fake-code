@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactElement } from 'react';
+import React from 'react';
 
 const getDefaultTheme = (): boolean => {
     if (
@@ -13,10 +13,10 @@ const getDefaultTheme = (): boolean => {
     }
 };
 
-export function DarkModeButton(): ReactElement {
-    const [isDarkMode, setDarkMode] = useState<boolean>(getDefaultTheme);
+export function DarkModeButton(): React.ReactElement {
+    const [isDarkMode, setDarkMode] = React.useState<boolean>(getDefaultTheme);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
             localStorage.theme = 'dark';
