@@ -7,6 +7,7 @@ specifiers:
   autoprefixer: ^10.2.5
   eslint: 7.26.0
   eslint-config-zyhou: 0.0.13
+  pnpm: 6.7.3
   postcss: ^8.3.0
   prettier: 2.3.0
   react: 17.0.2
@@ -27,6 +28,7 @@ devDependencies:
   autoprefixer: 10.2.6_postcss@8.3.0
   eslint: 7.26.0
   eslint-config-zyhou: 0.0.13_0a1b1d8e265aa89265291489ea713fec
+  pnpm: 6.7.3
   postcss: 8.3.0
   prettier: 2.3.0
   tailwindcss: 2.1.2_6daa0ece57b4377652e73c9c66c3b94c
@@ -2334,6 +2336,12 @@ packages:
   /pluralize/8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
+    dev: true
+
+  /pnpm/6.7.3:
+    resolution: {integrity: sha512-Yd9j0JaYod2qVB/yrc3zZRX6MeYcuQFcwTbJRxcV256A2R8tNT/i1Ms1uwapPlRosQc/9ya2RkdZ7fqNa6zPcA==}
+    engines: {node: '>=12.17'}
+    hasBin: true
     dev: true
 
   /postcss-functions/3.0.0:
