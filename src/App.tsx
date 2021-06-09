@@ -18,7 +18,8 @@ export function App(): React.ReactElement {
 
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const handleOnClick = () => {
-        const svgElement = document.querySelector('#wallpaper') as Node;
+        const svgElement = document.querySelector('#wallpaper') as SVGGraphicsElement;
+        const { width, height } = svgElement.getBBox();
         const svgXml = new XMLSerializer().serializeToString(svgElement);
         const svgBase64 = 'data:image/svg+xml;base64,' + btoa(svgXml);
 
@@ -27,12 +28,19 @@ export function App(): React.ReactElement {
             const canvas = document.createElement('canvas') as HTMLCanvasElement;
             const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-            const width = image.naturalWidth;
-            const height = image.naturalHeight;
+            canvas.width = 1920;
+            canvas.height = 1080;
 
-            canvas.width = width;
-            canvas.height = height;
-            context.drawImage(image, 0, 0, width, height);
+            context.fillStyle = theme.background;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.drawImage(
+                image,
+                canvas.width / 2 - width / 2,
+                canvas.height / 2 - height / 2,
+                width,
+                height,
+            );
 
             const link = document.createElement('a');
             link.download = `wallpaper-code.png`;
@@ -95,7 +103,7 @@ export function App(): React.ReactElement {
                         Download Wallpaper
                     </button>
                 </section>
-                <section className="flex">
+                <section className="flex mx-auto w-1/2">
                     <Wallpaper theme={theme} />
                 </section>
             </main>
