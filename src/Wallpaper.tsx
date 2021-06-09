@@ -4,97 +4,33 @@ import type { Theme } from './SelectThemes';
 
 type Properties = {
     theme: Theme;
-    canvasReference: React.RefObject<HTMLCanvasElement>;
 };
 
-export function Wallpaper({ theme, canvasReference }: Properties): React.ReactElement {
-    React.useEffect(() => {
-        if (!canvasReference.current) {
-            return;
-        }
-
-        const context = canvasReference.current.getContext('2d');
-        if (!context) {
-            return;
-        }
-
-        // background
-        context.fillStyle = theme.background;
-        context.fillRect(0, 0, 1920, 1080);
-
-        // left column
-        context.fillStyle = theme.white;
-        context.fillRect(477, 374, 17, 400);
-
-        // first row
-        context.fillStyle = theme.red;
-        context.fillRect(538, 374, 160, 24);
-
-        context.fillStyle = theme.green;
-        context.fillRect(719, 374, 290, 24);
-
-        context.fillStyle = theme.brightRed;
-        context.fillRect(1031, 374, 200, 24);
-
-        context.fillStyle = theme.white;
-        context.fillRect(1253, 374, 20, 24);
-
-        // second row
-        context.fillStyle = theme.brightGreen;
-        context.fillRect(617, 430, 160, 24);
-
-        context.fillStyle = theme.white;
-        context.fillRect(797, 430, 436, 24);
-
-        context.fillStyle = theme.red;
-        context.fillRect(1253, 430, 240, 24);
-
-        // third row
-        context.fillStyle = theme.brightRed;
-        context.fillRect(617, 475, 160, 24);
-
-        context.fillStyle = theme.green;
-        context.fillRect(797, 475, 512, 24);
-
-        context.fillStyle = theme.white;
-        context.fillRect(1332, 475, 20, 24);
-
-        // four row
-        context.fillStyle = theme.red;
-        context.fillRect(797, 520, 127, 24);
-
-        context.fillStyle = theme.white;
-        context.fillRect(946, 520, 162, 24);
-
-        context.fillStyle = theme.brightGreen;
-        context.fillRect(1131, 520, 202, 24);
-
-        // five row
-        context.fillStyle = theme.brightRed;
-        context.fillRect(797, 565, 436, 24);
-
-        // six row
-        context.fillStyle = theme.white;
-        context.fillRect(617, 604, 20, 24);
-
-        // seven row
-        context.fillStyle = theme.red;
-        context.fillRect(617, 660, 127, 24);
-
-        context.fillStyle = theme.brightGreen;
-        context.fillRect(762, 660, 242, 24);
-
-        // eight row
-        context.fillStyle = theme.green;
-        context.fillRect(617, 705, 127, 24);
-
-        context.fillStyle = theme.red;
-        context.fillRect(762, 705, 103, 24);
-
-        // nine row
-        context.fillStyle = theme.white;
-        context.fillRect(538, 750, 20, 24);
-    }, [canvasReference, theme]);
-
-    return <canvas ref={canvasReference} width={1920} height={1080}></canvas>;
+export function Wallpaper({ theme }: Properties): React.ReactElement {
+    return (
+        <svg id="wallpaper" version="1.1" width="1000" height="400">
+            <rect width="100%" height="100%" fill={theme.background} />
+            <rect fill={theme.white} x="0" y="0" width="17" height="400" />
+            <rect fill={theme.red} x="61" y="0" width="160" height="24" />
+            <rect fill={theme.green} x="242" y="0" width="290" height="24" />
+            <rect fill={theme.brightRed} x="554" y="0" width="200" height="24" />
+            <rect fill={theme.white} x="776" y="0" width="20" height="24" />
+            <rect fill={theme.brightGreen} x="140" y="56" width="160" height="24" />
+            <rect fill={theme.white} x="320" y="56" width="436" height="24" />
+            <rect fill={theme.red} x="776" y="56" width="240" height="24" />
+            <rect fill={theme.brightRed} x="140" y="101" width="160" height="24" />
+            <rect fill={theme.green} x="320" y="101" width="512" height="24" />
+            <rect fill={theme.white} x="855" y="101" width="20" height="24" />
+            <rect fill={theme.red} x="320" y="146" width="127" height="24" />
+            <rect fill={theme.white} x="469" y="146" width="162" height="24" />
+            <rect fill={theme.brightGreen} x="654" y="146" width="202" height="24" />
+            <rect fill={theme.brightRed} x="320" y="191" width="436" height="24" />
+            <rect fill={theme.white} x="140" y="230" width="20" height="24" />
+            <rect fill={theme.red} x="140" y="286" width="127" height="24" />
+            <rect fill={theme.brightGreen} x="285" y="286" width="242" height="24" />
+            <rect fill={theme.green} x="140" y="331" width="127" height="24" />
+            <rect fill={theme.red} x="285" y="331" width="103" height="24" />
+            <rect fill={theme.white} x="61" y="376" width="20" height="24" />
+        </svg>
+    );
 }

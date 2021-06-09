@@ -6,7 +6,6 @@ import { Wallpaper } from './Wallpaper';
 import type { Theme } from './SelectThemes';
 
 export function App(): React.ReactElement {
-    const canvasReference = React.useRef<HTMLCanvasElement>(null);
     const [theme, setTheme] = React.useState<Theme>({
         name: '3024 Day',
         red: '#db2d20',
@@ -17,17 +16,32 @@ export function App(): React.ReactElement {
         background: '#f7f7f7',
     });
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const handleOnClick = () => {
-        if (!canvasReference.current) {
-            return;
-        }
+        const svgElement = document.querySelector('#wallpaper') as Node;
+        const svgXml = new XMLSerializer().serializeToString(svgElement);
+        const svgBase64 = 'data:image/svg+xml;base64,' + btoa(svgXml);
 
-        const link = document.createElement('a');
-        link.download = `wallpaper-code.png`;
-        link.href = canvasReference.current.toDataURL('image/png');
-        document.body.append(link);
-        link.click();
-        link.remove();
+        const image = new Image();
+        image.addEventListener('load', () => {
+            const canvas = document.createElement('canvas') as HTMLCanvasElement;
+            const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+            const width = image.naturalWidth;
+            const height = image.naturalHeight;
+
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(image, 0, 0, width, height);
+
+            const link = document.createElement('a');
+            link.download = `wallpaper-code.png`;
+            link.href = canvas.toDataURL('image/png');
+            document.body.append(link);
+            link.click();
+            link.remove();
+        });
+        image.src = svgBase64;
     };
 
     return (
@@ -81,8 +95,8 @@ export function App(): React.ReactElement {
                         Download Wallpaper
                     </button>
                 </section>
-                <section className="flex bg-gray-900 dark:bg-white">
-                    <Wallpaper canvasReference={canvasReference} theme={theme} />
+                <section className="flex">
+                    <Wallpaper theme={theme} />
                 </section>
             </main>
             <footer></footer>
