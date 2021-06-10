@@ -44,6 +44,9 @@ export function App(): React.ReactElement {
             const canvas = document.createElement('canvas') as HTMLCanvasElement;
             const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
+            // window.screen.availHeight;
+            // window.screen.availWidth;
+
             canvas.width = 1920;
             canvas.height = 1080;
 
@@ -69,12 +72,12 @@ export function App(): React.ReactElement {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
-            <header className="text-gray-600 dark:text-gray-200">
+        <div className="flex flex-col min-h-screen antialiased text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800">
+            <header>
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a
                         href="/"
-                        className="flex title-font font-medium items-center mb-4 md:mb-0 hover:text-gray-900 dark:hover:text-white"
+                        className="flex title-font font-medium items-center mb-4 md:mb-0 hover:text-gray-600 dark:hover:text-white"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +93,7 @@ export function App(): React.ReactElement {
                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                         </svg>
-                        <span className="ml-3 text-xl hover:text-gray-900 dark:hover:text-white">
+                        <span className="ml-3 text-xl hover:text-gray-600 dark:hover:text-white">
                             Wallpaper Fake Code
                         </span>
                     </a>
@@ -99,7 +102,7 @@ export function App(): React.ReactElement {
                             href={twitterUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center mr-2 hover:text-gray-900 dark:hover:text-white"
+                            className="flex items-center mr-2 hover:text-gray-600 dark:hover:text-white"
                         >
                             <svg width="20" height="20" fill="currentColor" className="mr-2">
                                 <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
@@ -111,11 +114,11 @@ export function App(): React.ReactElement {
                 </div>
             </header>
             <main className="flex-grow">
-                <section className="flex mb-16">
+                <section className="container flex justify-center items-center mb-16">
                     <SelectThemes theme={theme} setTheme={setTheme} />
                     <button
                         onClick={handleOnClick}
-                        className="w-56 flex items-center py-2 px-4 max-w-xs mx-auto text-base font-semibold font-primary rounded-md focus:outline-none focus:ring-1 focus:ring-palette-primary focus:ring-offset-2"
+                        className="ml-16 flex items-center btn-primary text-lg h-12 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 mr-1 rounded"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -141,14 +144,14 @@ export function App(): React.ReactElement {
                     </div>
                 </section>
             </main>
-            <footer className="flex justify-center items-center flex-wrap flex-col mb-4 md:flex-row text-gray-600 dark:text-gray-200">
+            <footer className="flex justify-center items-center flex-wrap flex-col my-4 md:flex-row">
                 <p>
                     created by{' '}
                     <a
                         href="https://twitter.com/rmaximedev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mr-2 hover:text-gray-900 dark:hover:text-white"
+                        className="mr-2 text-blue-500 hover:text-blue-700 font-semibold"
                     >
                         @rmaximedev
                     </a>
@@ -158,7 +161,7 @@ export function App(): React.ReactElement {
                     href="https://github.com/zyhou/wallpaper-fake-code"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center mx-2 hover:text-gray-900 dark:hover:text-white"
+                    className="flex items-center mx-2 hover:text-gray-600 dark:hover:text-white"
                 >
                     <svg width="24" height="24" fill="currentColor" className="mr-2">
                         <path
@@ -167,7 +170,7 @@ export function App(): React.ReactElement {
                             d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"
                         ></path>
                     </svg>
-                    <p>Source code</p>
+                    <p>Source</p>
                 </a>
             </footer>
         </div>

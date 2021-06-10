@@ -54,8 +54,8 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     };
 
     return (
-        <div className="mt-12 mx-auto w-2/6 flex dark:text-white">
-            <div className="font-medium pb-2 flex">
+        <div className="flex">
+            <div className="font-medium flex items-center pr-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -70,10 +70,10 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                         d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
                     />
                 </svg>
-                Blend Mode
+                Themes
             </div>
             <select
-                className="w-full form-select px-4 py-3 rounded-lg text-gray-900"
+                className="form-select cursor-pointer px-4 py-3 rounded-lg text-gray-700 font-medium border border-gray-600 hover:border-gray-800"
                 value={theme.name}
                 onChange={handleOnChange}
             >
