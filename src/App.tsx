@@ -76,7 +76,7 @@ export function App(): React.ReactElement {
             className="flex flex-col min-h-screen antialiased text-gray-500 dark:text-gray-200"
             style={{ backgroundColor: theme.background }}
         >
-            <header>
+            <header className="bg-white dark:bg-gray-800">
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a
                         href="/"
@@ -116,8 +116,8 @@ export function App(): React.ReactElement {
                     <DarkModeButton />
                 </div>
             </header>
-            <main className="flex-grow">
-                <section className="container flex justify-center items-center mb-16">
+            <main className="flex-grow mt-8">
+                <section className="container flex justify-center items-center mx-auto mb-12">
                     <SelectThemes theme={theme} setTheme={setTheme} />
                     <button
                         onClick={handleOnClick}
