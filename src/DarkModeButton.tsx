@@ -33,7 +33,7 @@ export function DarkModeButton(): React.ReactElement {
     return (
         <button
             onClick={setTheme}
-            className="transition duration-500 ease-in-out rounded-full p-2 text-gray-900 dark:text-white"
+            className="transition duration-500 ease-in-out rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
         >
             {isDarkMode ? (
                 <svg

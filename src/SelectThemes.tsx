@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type Theme = {
     name: string;
@@ -13,10 +14,13 @@ export type Theme = {
 export type Themes = Theme[];
 
 type Properties = {
+    theme: Theme;
     setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 };
 
-export function SelectThemes({ setTheme }: Properties): React.ReactElement {
+export function SelectThemes({ theme, setTheme }: Properties): React.ReactElement {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [themes, setThemes] = React.useState<Themes>([]);
 
     React.useEffect(() => {
@@ -29,10 +33,23 @@ export function SelectThemes({ setTheme }: Properties): React.ReactElement {
         getThemes();
     }, []);
 
+    React.useEffect(() => {
+        const defaultTheme = new URLSearchParams(location.search).get('theme');
+        if (!defaultTheme || !themes || themes.length === 0) {
+            return;
+        }
+
+        const theme = themes.find((theme) => theme.name === defaultTheme);
+        if (theme) {
+            setTheme(theme);
+        }
+    }, [location, themes]);
+
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = themes.find((theme) => theme.name === event.target.value);
         if (theme) {
             setTheme(theme);
+            navigate(`/?theme=${theme.name}`);
         }
     };
 
@@ -57,6 +74,7 @@ export function SelectThemes({ setTheme }: Properties): React.ReactElement {
             </div>
             <select
                 className="w-full form-select px-4 py-3 rounded-lg text-gray-900"
+                value={theme.name}
                 onChange={handleOnChange}
             >
                 {themes &&
