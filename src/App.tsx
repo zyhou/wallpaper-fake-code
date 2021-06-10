@@ -72,7 +72,10 @@ export function App(): React.ReactElement {
     };
 
     return (
-        <div className="flex flex-col min-h-screen antialiased text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800">
+        <div
+            className="flex flex-col min-h-screen antialiased text-gray-500 dark:text-gray-200"
+            style={{ backgroundColor: theme.background }}
+        >
             <header>
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a
