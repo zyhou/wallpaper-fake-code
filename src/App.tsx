@@ -16,7 +16,6 @@ export function App(): React.ReactElement {
         background: '#f7f7f7',
     });
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const handleOnClick = () => {
         const svgElement = document.querySelector('#wallpaper') as SVGGraphicsElement;
         const { width, height } = svgElement.getBBox();

@@ -20,7 +20,6 @@ export function SelectThemes({ setTheme }: Properties): React.ReactElement {
     const [themes, setThemes] = React.useState<Themes>([]);
 
     React.useEffect(() => {
-        // eslint-disable-next-line unicorn/consistent-function-scoping
         async function getThemes() {
             import('./themes.json').then((importThemes) => {
                 setThemes(importThemes.default);
