@@ -4,6 +4,11 @@ import { SelectThemes } from './SelectThemes';
 import { Wallpaper } from './Wallpaper';
 import type { Theme } from './SelectThemes';
 
+type Resolution = {
+    width: number;
+    height: number;
+};
+
 const getTwitterUrl = () =>
     `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         `Thank you @rmaximedev for my new wallpaper 😍 #wallpaper`,
@@ -18,6 +23,11 @@ export function App(): React.ReactElement {
         brightRed: '#e8bbd0',
         brightGreen: '#3a3432',
         background: '#f7f7f7',
+    });
+
+    const [resolution, setResolution] = React.useState<Resolution>({
+        width: window.screen.width,
+        height: window.screen.height,
     });
 
     const [twitterUrl, setTwitterUrl] = React.useState<string>(
@@ -43,11 +53,8 @@ export function App(): React.ReactElement {
             const canvas = document.createElement('canvas') as HTMLCanvasElement;
             const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-            // window.screen.availHeight;
-            // window.screen.availWidth;
-
-            canvas.width = 1920;
-            canvas.height = 1080;
+            canvas.width = resolution.width;
+            canvas.height = resolution.height;
 
             context.fillStyle = theme.background;
             context.fillRect(0, 0, canvas.width, canvas.height);
@@ -117,9 +124,26 @@ export function App(): React.ReactElement {
             <main className="flex-grow mt-8">
                 <section className="container flex justify-center items-center mx-auto mb-12">
                     <SelectThemes theme={theme} setTheme={setTheme} />
+                    <button className="ml-16 flex items-center btn-secondary">
+                        {resolution.width}x{resolution.height} resolution
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
+                    </button>
                     <button
                         onClick={handleOnClick}
-                        className="ml-16 flex items-center btn-primary text-lg h-12 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 mr-1 rounded"
+                        className="ml-16 flex items-center text-lg h-12 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 mr-1 rounded"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
