@@ -54,7 +54,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     };
 
     return (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0">
             <div className="font-medium flex items-center pr-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -102,7 +102,7 @@ export function App(): React.ReactElement {
                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                         </svg>
-                        <span className="ml-3 text-xl hover:text-gray-600">
+                        <span className="ml-3 text-xl tracking-wide hover:text-gray-600">
                             Wallpaper Fake Code
                         </span>
                     </a>
@@ -122,9 +122,9 @@ export function App(): React.ReactElement {
                 </div>
             </header>
             <main className="flex-grow mt-8">
-                <section className="container flex justify-center items-center mx-auto mb-12">
+                <section className="container flex flex-col justify-center items-center mx-auto mb-12 md:flex-row space-y-5 md:space-y-0">
                     <SelectThemes theme={theme} setTheme={setTheme} />
-                    <button className="ml-16 flex items-center btn-secondary">
+                    <button className="flex items-center md:mx-16">
                         {resolution.width}x{resolution.height} resolution
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@ export function App(): React.ReactElement {
                     </button>
                     <button
                         onClick={handleOnClick}
-                        className="ml-16 flex items-center text-lg h-12 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 mr-1 rounded"
+                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@ export function App(): React.ReactElement {
                     </button>
                 </section>
                 <section
-                    className="container mx-auto flex items-center h-md lg:h-lg"
+                    className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
                     style={{ backgroundColor: theme.background }}
                 >
                     <div className="flex mx-auto w-4/5 lg:w-3/5 xl:2/5">
@@ -170,8 +170,21 @@ export function App(): React.ReactElement {
                 </section>
             </main>
             <footer className="flex justify-center items-center flex-wrap flex-col my-4 md:flex-row">
-                <p>
-                    created by{' '}
+                <p className="flex">
+                    Made with{' '}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="h-5 w-5 text-red-500 mx-1"
+                    >
+                        <path
+                            fillRule="evenodd"
+                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                            clipRule="evenodd"
+                        ></path>
+                    </svg>{' '}
+                    by{' '}
                     <a
                         href="https://twitter.com/rmaximedev"
                         target="_blank"

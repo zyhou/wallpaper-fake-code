@@ -1,14 +1,23 @@
 # Wallpaper Fake Code
 
-## rerequisite
+## Todo
+
+-   meta seo
+-   select different resolution
+-   custom color
+-   upload code
+
+## Contribution
+
+### Prerequisite
 
 [Node.js](https://nodejs.org/en/) are installed on your machine.
 
-## Installation
+### Installation
 
 -   Clone this repo
--   Run make install to install dependencies
--   Run make dev to start the project
+-   Run `make install` to install dependencies
+-   Run `make dev` to start the project
 -   Play on [http://localhost:3000/](http://localhost:3000/)
 
 > Type make help to list all commands available
