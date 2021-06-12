@@ -1,9 +1,9 @@
 # Wallpaper Fake Code
 
+https://www.instagram.com/morgan.codes/
+
 ## Todo
 
--   meta seo
--   select different resolution
 -   readme
 -   custom color
 -   upload code

@@ -1,17 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export type Theme = {
-    name: string;
-    background: string;
-    red: string;
-    brightRed: string;
-    green: string;
-    brightGreen: string;
-    white: string;
-};
-
-export type Themes = Theme[];
+import type { Theme, Themes } from './types';
 
 type Properties = {
     theme: Theme;
@@ -73,7 +63,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                 Themes
             </div>
             <select
-                className="form-select cursor-pointer px-4 py-3 rounded-lg text-gray-700 font-medium border border-gray-600 hover:border-gray-800"
+                className="cursor-pointer px-4 py-3 rounded-lg text-gray-700 font-medium border border-gray-600 hover:border-gray-800"
                 value={theme.name}
                 onChange={handleOnChange}
             >

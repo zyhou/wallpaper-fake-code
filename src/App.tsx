@@ -1,13 +1,8 @@
 import React from 'react';
 
-import { SelectThemes } from './SelectThemes';
+import type { Theme } from './types';
 import { Wallpaper } from './Wallpaper';
-import type { Theme } from './SelectThemes';
-
-type Resolution = {
-    width: number;
-    height: number;
-};
+import { ActionButtons } from './ActionButtons';
 
 const getTwitterUrl = () =>
     `https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -25,11 +20,6 @@ export function App(): React.ReactElement {
         background: '#f7f7f7',
     });
 
-    const [resolution, setResolution] = React.useState<Resolution>({
-        width: window.screen.width,
-        height: window.screen.height,
-    });
-
     const [twitterUrl, setTwitterUrl] = React.useState<string>(
         `${getTwitterUrl()}&url=${encodeURIComponent(window.location.origin)}`,
     );
@@ -42,41 +32,6 @@ export function App(): React.ReactElement {
         );
     }, [theme]);
 
-    const handleOnClick = () => {
-        const svgElement = document.querySelector('#wallpaper') as SVGGraphicsElement;
-        const { width, height } = svgElement.getBBox();
-        const svgXml = new XMLSerializer().serializeToString(svgElement);
-        const svgBase64 = 'data:image/svg+xml;base64,' + btoa(svgXml);
-
-        const image = new Image();
-        image.addEventListener('load', () => {
-            const canvas = document.createElement('canvas') as HTMLCanvasElement;
-            const context = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-            canvas.width = resolution.width;
-            canvas.height = resolution.height;
-
-            context.fillStyle = theme.background;
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            context.drawImage(
-                image,
-                canvas.width / 2 - width / 2,
-                canvas.height / 2 - height / 2,
-                width,
-                height,
-            );
-
-            const link = document.createElement('a');
-            link.download = `wallpaper-code.png`;
-            link.href = canvas.toDataURL('image/png');
-            document.body.append(link);
-            link.click();
-            link.remove();
-        });
-        image.src = svgBase64;
-    };
-
     return (
         <div
             className="flex flex-col min-h-screen antialiased text-gray-500"
@@ -86,7 +41,7 @@ export function App(): React.ReactElement {
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a
                         href="/"
-                        className="flex title-font font-medium items-center mb-4 md:mb-0 hover:text-gray-600"
+                        className="flex title-font font-medium items-center mb-4 md:mb-0 text-gray-700 hover:text-gray-900"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -102,9 +57,7 @@ export function App(): React.ReactElement {
                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                         </svg>
-                        <span className="ml-3 text-xl tracking-wide hover:text-gray-600">
-                            Wallpaper Fake Code
-                        </span>
+                        <h1 className="text-xl tracking-wide">Wallpaper Fake Code</h1>
                     </a>
                     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
                         <a
@@ -122,44 +75,7 @@ export function App(): React.ReactElement {
                 </div>
             </header>
             <main className="flex-grow mt-8">
-                <section className="container flex flex-col justify-center items-center mx-auto mb-12 md:flex-row space-y-5 md:space-y-0">
-                    <SelectThemes theme={theme} setTheme={setTheme} />
-                    <button className="flex items-center md:mx-16">
-                        {resolution.width}x{resolution.height} resolution
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 9l-7 7-7-7"
-                            />
-                        </svg>
-                    </button>
-                    <button
-                        onClick={handleOnClick}
-                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                        Download Wallpaper
-                    </button>
-                </section>
+                <ActionButtons theme={theme} setTheme={setTheme} />
                 <section
                     className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
                     style={{ backgroundColor: theme.background }}
@@ -171,7 +87,7 @@ export function App(): React.ReactElement {
             </main>
             <footer className="flex justify-center items-center flex-wrap flex-col my-4 md:flex-row">
                 <p className="flex">
-                    Made with{' '}
+                    Made with
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -183,13 +99,13 @@ export function App(): React.ReactElement {
                             d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                             clipRule="evenodd"
                         ></path>
-                    </svg>{' '}
-                    by{' '}
+                    </svg>
+                    by
                     <a
                         href="https://twitter.com/rmaximedev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mr-2 text-blue-500 hover:text-blue-700 font-semibold"
+                        className="mx-1 text-blue-500 hover:text-blue-700 font-semibold"
                     >
                         @rmaximedev
                     </a>

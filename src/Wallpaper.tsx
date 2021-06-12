@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Theme } from './SelectThemes';
+import type { Theme } from './types';
 
 type Properties = {
     theme: Theme;
