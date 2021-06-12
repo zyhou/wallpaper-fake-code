@@ -4,6 +4,7 @@
 
 -   meta seo
 -   select different resolution
+-   readme
 -   custom color
 -   upload code
 
