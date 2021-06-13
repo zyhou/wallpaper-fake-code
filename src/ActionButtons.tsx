@@ -7,7 +7,6 @@ interface Map {
     [key: string]: Resolution[];
 }
 
-const MAX_RESOLUTIONS_SIZES = 5;
 const resolutions: Map = {
     Ultrawide: [
         { width: 2560, height: 1080 },
@@ -111,7 +110,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                     {resolution.width}x{resolution.height} resolution
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
+                        className="h-6 w-6 ml-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -120,7 +119,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
+                            d={showResolution ? `M5 15l7-7 7 7` : `M19 9l-7 7-7-7`}
                         />
                     </svg>
                 </button>
@@ -144,7 +143,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 </button>
             </section>
             {showResolution && (
-                <section className="bg-white flex flex-col items-center py-12 mb-12">
+                <section className="bg-white flex flex-col items-center py-8 mb-12">
                     <p className="mb-5 font-bold">Pick a resolution</p>
                     <p className="mb-2">
                         Your screen resolution is{' '}
@@ -153,54 +152,41 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                         </span>
                         .
                     </p>
-                    <table>
-                        <thead>
-                            <tr>
-                                {Object.keys(resolutions).map((name) => (
-                                    <th key={name}>{name}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.from({ length: MAX_RESOLUTIONS_SIZES }, (_, i) => i).map(
-                                (index) => {
-                                    return (
-                                        <tr key={index}>
-                                            {Object.keys(resolutions).map((name) => {
-                                                const resolutionSize = resolutions[name][index];
-                                                if (!resolutionSize) {
-                                                    return <td key={`empty-td-${index}`}></td>;
-                                                }
-
-                                                const formatResolution = `${resolutionSize.width}x${resolutionSize.height}`;
-
-                                                return (
-                                                    <td
-                                                        key={`${resolutionSize.width}x${resolutionSize.height}`}
+                    <div className="flex flex-col md:flex-row">
+                        {Object.entries(resolutions).map(([name, resolutionsSizes]) => {
+                            return (
+                                <div key={name} className="flex flex-col">
+                                    <span className="text-center font-bold">{name}</span>
+                                    <div className="flex flex-wrap items-center mx-1 md:flex-col">
+                                        {resolutionsSizes.map((resolutionsSize) => {
+                                            const formatResolution = `${resolutionsSize.width}x${resolutionsSize.height}`;
+                                            return (
+                                                <div
+                                                    key={formatResolution}
+                                                    className="w-full my-1.5"
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name="resolution-picker"
+                                                        id={`form-${formatResolution}`}
+                                                        value={formatResolution}
+                                                        onChange={handleOnChangeResolution}
+                                                        className="hidden"
+                                                    />
+                                                    <label
+                                                        htmlFor={`form-${formatResolution}`}
+                                                        className="block p-1 transition duration-300 ease-in-out bg-blue-500 hover:bg-blue-700 text-white text-center rounded ring ring-blue"
                                                     >
-                                                        <input
-                                                            type="radio"
-                                                            name="resolution-picker"
-                                                            id={`form-${formatResolution}`}
-                                                            value={formatResolution}
-                                                            onChange={handleOnChangeResolution}
-                                                            className="hidden"
-                                                        />
-                                                        <label
-                                                            htmlFor={`form-${formatResolution}`}
-                                                            className="block transition duration-300 ease-in-out bg-blue-500 hover:bg-blue-700 text-white text-center p-1 m-1 rounded ring ring-blue"
-                                                        >
-                                                            {formatResolution}
-                                                        </label>
-                                                    </td>
-                                                );
-                                            })}
-                                        </tr>
-                                    );
-                                },
-                            )}
-                        </tbody>
-                    </table>
+                                                        {formatResolution}
+                                                    </label>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </section>
             )}
         </div>
