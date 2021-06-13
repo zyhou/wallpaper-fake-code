@@ -1,10 +1,25 @@
-# Wallpaper Fake Code
+<div align="center">
+    <h1>Wallpaper Fake Code</h1>
+
+    <img
+        height="80"
+        width="80"
+        alt="Wallpaper Fake Code"
+        src="./wallpaper-fake-code.png"
+    />
+
+    <p>description</p>
+
+    <br />
+
+</div>
+
+## Inspiration
 
 https://www.instagram.com/morgan.codes/
 
 ## Todo
 
--   readme
 -   custom color
 -   upload code
 
@@ -22,3 +37,7 @@ https://www.instagram.com/morgan.codes/
 -   Play on [http://localhost:3000/](http://localhost:3000/)
 
 > Type make help to list all commands available
+
+### Add a new theme
+
+You can add your theme in [themes.json](./src/themes.json) file, please keep the alphabetical order.
