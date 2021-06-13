@@ -1,17 +1,16 @@
 <div align="center">
-    <h1>Wallpaper Fake Code</h1>
+<h1>Wallpaper Fake Code</h1>
 
-    <img
-        height="80"
-        width="80"
-        alt="Wallpaper Fake Code"
-        src="./wallpaper-fake-code.png"
-    />
+<img
+    height="600"
+    width="1000"
+    alt="Wallpaper Fake Code"
+    src="./wallpaper-fake-code.png"
+/>
 
-    <p>description</p>
+<p>description</p>
 
-    <br />
-
+<br />
 </div>
 
 ## Inspiration
