@@ -14,6 +14,11 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     const navigate = useNavigate();
     const [themes, setThemes] = React.useState<Themes>([]);
 
+    const setThemeAndNavigate = (theme: Theme) => {
+        setTheme(theme);
+        navigate(`/?theme=${theme.name}`);
+    };
+
     React.useEffect(() => {
         async function getThemes() {
             import('./themes.json').then((importThemes) => {
@@ -39,8 +44,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = themes.find((currentTheme) => currentTheme.name === event.target.value);
         if (theme) {
-            setTheme(theme);
-            navigate(`/?theme=${theme.name}`);
+            setThemeAndNavigate(theme);
         }
     };
 
@@ -51,7 +55,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
         }
 
         const prevThemeIndex = themeIndex - 1 < 0 ? themes.length - 1 : themeIndex - 1;
-        setTheme(themes[prevThemeIndex]);
+        setThemeAndNavigate(themes[prevThemeIndex]);
     };
 
     const handleOnNextTheme = () => {
@@ -61,7 +65,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
         }
 
         const nextThemeIndex = themeIndex + 1 < themes.length ? themeIndex + 1 : 0;
-        setTheme(themes[nextThemeIndex]);
+        setThemeAndNavigate(themes[nextThemeIndex]);
     };
 
     const handleUserKeyPress = React.useCallback(
@@ -96,7 +100,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
         <div className="font-medium text-gray-700 flex">
             <button
                 onClick={handleOnPrevTheme}
-                className="flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white"
+                className="flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +130,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
             </select>
             <button
                 onClick={handleOnNextTheme}
-                className="flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white"
+                className="flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
             >
                 Next
                 <svg
