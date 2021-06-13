@@ -8,7 +8,7 @@
     src="./wallpaper-fake-code.png"
 />
 
-<p>description</p>
+<p>Download this free wallpaper fake code and custom it with your vscode theme</p>
 
 <br />
 </div>
