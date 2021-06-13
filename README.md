@@ -24,7 +24,6 @@ Thanks to Morgan and Sarah for the inspiration.
 
 ## Todo
 
--   [ ] custom color
 -   [ ] upload code
 
 ## Contribution
