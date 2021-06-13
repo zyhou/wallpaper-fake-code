@@ -68,24 +68,21 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
         setThemeAndNavigate(themes[nextThemeIndex]);
     };
 
-    const handleUserKeyPress = React.useCallback(
-        (event: KeyboardEvent) => {
+    React.useEffect(() => {
+        const handleUserKeyPress = (event: KeyboardEvent) => {
             const key = event.key.toLowerCase();
             if (key === 'j') {
                 handleOnPrevTheme();
             } else if (key === 'k') {
                 handleOnNextTheme();
             }
-        },
-        [theme],
-    );
+        };
 
-    React.useEffect(() => {
         document.addEventListener('keydown', handleUserKeyPress);
         return () => {
             document.removeEventListener('keydown', handleUserKeyPress);
         };
-    }, [handleUserKeyPress]);
+    });
 
     const { ref } = useSwipeable({
         onSwipedLeft: handleOnNextTheme,
