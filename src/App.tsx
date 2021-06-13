@@ -18,6 +18,7 @@ export function App(): React.ReactElement {
         brightRed: '#e8bbd0',
         brightGreen: '#3a3432',
         background: '#f7f7f7',
+        isDark: false,
     });
 
     const [twitterUrl, setTwitterUrl] = React.useState<string>(
@@ -34,45 +35,42 @@ export function App(): React.ReactElement {
 
     return (
         <div
-            className="flex flex-col min-h-screen antialiased text-gray-500"
+            className={`flex flex-col min-h-screen antialiased ${
+                theme.isDark ? `text-white` : `text-black`
+            }`}
             style={{ backgroundColor: theme.background }}
         >
-            <header className="bg-white">
-                <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                    <a
-                        href="/"
-                        className="flex title-font font-medium items-center mb-4 md:mb-0 text-gray-700 hover:text-gray-900"
+            <header className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <a href="/" className="flex title-font font-medium items-center mb-4 md:mb-0">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-14 h-14 p-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-14 h-14 p-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                    </svg>
+                    <h1 className="text-xl tracking-wide">Wallpaper Fake Code</h1>
+                </a>
+                <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    <a
+                        href={twitterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center mr-2 opacity-80 hover:opacity-100"
+                    >
+                        <svg width="20" height="20" fill="currentColor" className="mr-2">
+                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
                         </svg>
-                        <h1 className="text-xl tracking-wide">Wallpaper Fake Code</h1>
+                        <p>Share on Twitter</p>
                     </a>
-                    <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                        <a
-                            href={twitterUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center mr-2 hover:text-gray-600"
-                        >
-                            <svg width="20" height="20" fill="currentColor" className="mr-2">
-                                <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
-                            </svg>
-                            <p>Share on Twitter</p>
-                        </a>
-                    </nav>
-                </div>
+                </nav>
             </header>
             <main className="flex-grow mt-8">
                 <ActionButtons theme={theme} setTheme={setTheme} />
@@ -115,7 +113,7 @@ export function App(): React.ReactElement {
                     href="https://github.com/zyhou/wallpaper-fake-code"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center mx-2 hover:text-gray-600"
+                    className="flex items-center mx-2 opacity-80 hover:opacity-100"
                 >
                     <svg width="24" height="24" fill="currentColor" className="mr-2">
                         <path

@@ -94,10 +94,12 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     });
 
     return (
-        <div className="font-medium text-gray-700 flex">
+        <div className={`font-medium flex ${theme.isDark ? `text-black` : `text-white`}`}>
             <button
                 onClick={handleOnPrevTheme}
-                className="flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
+                className={`flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline ${
+                    theme.isDark ? `bg-white` : `bg-black`
+                }`}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +117,11 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                 </svg>
                 Prev
             </button>
-            <select className="cursor-pointer w-full" value={theme.name} onChange={handleOnChange}>
+            <select
+                className={`cursor-pointer w-full ${theme.isDark ? `bg-white` : `bg-black`}`}
+                value={theme.name}
+                onChange={handleOnChange}
+            >
                 {themes &&
                     themes.map((theme: Theme) => {
                         return (
@@ -127,7 +133,9 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
             </select>
             <button
                 onClick={handleOnNextTheme}
-                className="flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
+                className={`flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline ${
+                    theme.isDark ? `bg-white` : `bg-black`
+                }`}
             >
                 Next
                 <svg

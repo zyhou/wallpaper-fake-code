@@ -145,7 +145,11 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 </div>
             </section>
             {showResolution && (
-                <section className="bg-white flex flex-col items-center py-8 mb-12">
+                <section
+                    className={`${
+                        theme.isDark ? `bg-white text-black` : `bg-black text-white`
+                    } flex flex-col items-center py-8 mb-12`}
+                >
                     <p className="mb-5 font-bold">Pick a resolution</p>
                     <p className="mb-2">
                         Your screen resolution is{' '}
