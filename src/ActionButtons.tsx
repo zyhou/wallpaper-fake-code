@@ -50,8 +50,8 @@ type Properties = {
 
 export function ActionButtons({ theme, setTheme }: Properties): React.ReactElement {
     const [resolution, setResolution] = React.useState<Resolution>({
-        width: 1920,
-        height: 1080,
+        width: window.screen.width,
+        height: window.screen.height,
     });
     const [showResolution, setShowResolution] = React.useState<boolean>(false);
 
@@ -103,44 +103,46 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
         <div>
             <section className="container flex flex-col justify-center items-center mx-auto mb-12 md:flex-row space-y-5 md:space-y-0">
                 <SelectThemes theme={theme} setTheme={setTheme} />
-                <button
-                    onClick={handleOnClickResolution}
-                    className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-300 hover:bg-blue-500 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
-                >
-                    {resolution.width}x{resolution.height} resolution
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 ml-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                <div className="flex items-center flex-col md:flex-row space-y-5 md:space-y-0">
+                    <button
+                        onClick={handleOnClickResolution}
+                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-300 hover:bg-blue-500 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d={showResolution ? `M5 15l7-7 7 7` : `M19 9l-7 7-7-7`}
-                        />
-                    </svg>
-                </button>
-                <button
-                    onClick={handleOnClickDownload}
-                    className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                        {resolution.width}x{resolution.height} resolution
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 ml-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d={showResolution ? `M5 15l7-7 7 7` : `M19 9l-7 7-7-7`}
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        onClick={handleOnClickDownload}
+                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
                     >
-                        <path
-                            fillRule="evenodd"
-                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                    Download Wallpaper
-                </button>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                        Download Wallpaper
+                    </button>
+                </div>
             </section>
             {showResolution && (
                 <section className="bg-white flex flex-col items-center py-8 mb-12">

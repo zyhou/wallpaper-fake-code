@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSwipeable } from 'react-swipeable';
 
 import type { Theme, Themes } from './types';
 
@@ -29,23 +30,74 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
             return;
         }
 
-        const theme = themes.find((theme) => theme.name === defaultTheme);
+        const theme = themes.find((currentTheme) => currentTheme.name === defaultTheme);
         if (theme) {
             setTheme(theme);
         }
     }, [location, themes]);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const theme = themes.find((theme) => theme.name === event.target.value);
+        const theme = themes.find((currentTheme) => currentTheme.name === event.target.value);
         if (theme) {
             setTheme(theme);
             navigate(`/?theme=${theme.name}`);
         }
     };
 
+    const handleOnPrevTheme = () => {
+        const themeIndex = themes.findIndex((currentTheme) => currentTheme.name === theme.name);
+        if (themeIndex === -1) {
+            return;
+        }
+
+        const prevThemeIndex = themeIndex - 1 < 0 ? themes.length - 1 : themeIndex - 1;
+        setTheme(themes[prevThemeIndex]);
+    };
+
+    const handleOnNextTheme = () => {
+        const themeIndex = themes.findIndex((currentTheme) => currentTheme.name === theme.name);
+        if (themeIndex === -1) {
+            return;
+        }
+
+        const nextThemeIndex = themeIndex + 1 < themes.length ? themeIndex + 1 : 0;
+        setTheme(themes[nextThemeIndex]);
+    };
+
+    const handleUserKeyPress = React.useCallback(
+        (event: KeyboardEvent) => {
+            const key = event.key.toLowerCase();
+            if (key === 'j') {
+                handleOnPrevTheme();
+            } else if (key === 'k') {
+                handleOnNextTheme();
+            }
+        },
+        [theme],
+    );
+
+    React.useEffect(() => {
+        document.addEventListener('keydown', handleUserKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleUserKeyPress);
+        };
+    }, [handleUserKeyPress]);
+
+    const { ref } = useSwipeable({
+        onSwipedLeft: handleOnNextTheme,
+        onSwipedRight: handleOnPrevTheme,
+    }) as { ref: React.RefCallback<Document> };
+
+    React.useEffect(() => {
+        ref(document);
+    });
+
     return (
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0">
-            <div className="font-medium flex items-center pr-2">
+        <div className="font-medium text-gray-700 flex">
+            <button
+                onClick={handleOnPrevTheme}
+                className="flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white"
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -57,16 +109,12 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                        d="M15 19l-7-7 7-7"
                     />
                 </svg>
-                Themes
-            </div>
-            <select
-                className="cursor-pointer px-4 py-3 rounded-lg text-gray-700 font-medium border border-gray-600 hover:border-gray-800"
-                value={theme.name}
-                onChange={handleOnChange}
-            >
+                Prev
+            </button>
+            <select className="cursor-pointer w-full" value={theme.name} onChange={handleOnChange}>
                 {themes &&
                     themes.map((theme: Theme) => {
                         return (
@@ -76,6 +124,26 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                         );
                     })}
             </select>
+            <button
+                onClick={handleOnNextTheme}
+                className="flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white"
+            >
+                Next
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                    />
+                </svg>
+            </button>
         </div>
     );
 }
