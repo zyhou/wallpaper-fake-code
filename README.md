@@ -15,10 +15,12 @@
 
 ## Inspiration
 
-Since one year now, I use as wallpaper the [Holiday Theme](https://www.morgan.codes/wallpapers/) in dark mode from
+For one year now, I'm using the [Holiday Theme](https://www.morgan.codes/wallpapers/) wallpaper in dark mode from
 [morgan.codes](https://www.instagram.com/morgan.codes/).
 
 Besides that, I'm a big fan of [Night Owl](https://github.com/sdras/night-owl-vscode-theme) theme from [Sarah Drasner](https://twitter.com/sarah_edo). So I decided to create a site that allows you to customize the colors of the wallpaper.
+
+Thanks to Morgan and Sarah for the inspiration.
 
 ## Todo
 
