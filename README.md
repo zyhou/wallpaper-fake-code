@@ -2,8 +2,8 @@
 <h1>Wallpaper Fake Code</h1>
 
 <img
-    height="600"
-    width="1000"
+    height="300"
+    width="600"
     alt="Wallpaper Fake Code"
     src="./wallpaper-fake-code.png"
 />
