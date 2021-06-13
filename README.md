@@ -19,8 +19,8 @@ https://www.instagram.com/morgan.codes/
 
 ## Todo
 
--   custom color
--   upload code
+-   [ ] custom color
+-   [ ] upload code
 
 ## Contribution
 
