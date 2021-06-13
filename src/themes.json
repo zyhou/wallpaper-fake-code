@@ -1287,6 +1287,24 @@
         "background": "#1c1e22"
     },
     {
+        "name": "Night Owl",
+        "red": "#EF5350",
+        "green": "#22DA6E",
+        "white": "#FFFFFF",
+        "brightRed": "#EF5350",
+        "brightGreen": "#22DA6E",
+        "background": "#011627"
+    },
+    {
+        "name": "Night Owl Light",
+        "red": "#DE3D3B",
+        "green": "#08916A",
+        "white": "#F0F0F0",
+        "brightRed": "#DE3D3B",
+        "brightGreen": "#08916A",
+        "background": "#FBFBFB"
+    },
+    {
         "name": "Night Owlish Light",
         "red": "#d3423e",
         "green": "#2aa298",
