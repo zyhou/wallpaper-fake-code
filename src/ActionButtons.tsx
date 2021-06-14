@@ -106,7 +106,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 <div className="flex items-center flex-col md:flex-row space-y-5 md:space-y-0">
                     <button
                         onClick={handleOnClickResolution}
-                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-600 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
+                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:ring bg-blue-600 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
                     >
                         {resolution.width}x{resolution.height} resolution
                         <svg
@@ -126,7 +126,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                     </button>
                     <button
                         onClick={handleOnClickDownload}
-                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-600 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
+                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:ring bg-blue-600 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
