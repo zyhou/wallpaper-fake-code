@@ -94,10 +94,10 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     });
 
     return (
-        <div className="font-medium text-gray-700 flex">
+        <div className="font-medium flex justify-center text-white">
             <button
                 onClick={handleOnPrevTheme}
-                className="flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
+                className="flex items-center rounded-l-md p-3 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-600 hover:bg-blue-700"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,11 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                 </svg>
                 Prev
             </button>
-            <select className="cursor-pointer w-full" value={theme.name} onChange={handleOnChange}>
+            <select
+                className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700"
+                value={theme.name}
+                onChange={handleOnChange}
+            >
                 {themes &&
                     themes.map((theme: Theme) => {
                         return (
@@ -127,7 +131,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
             </select>
             <button
                 onClick={handleOnNextTheme}
-                className="flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-white hover:bg-gray-100"
+                className="flex items-center rounded-r-md p-3 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-600 hover:bg-blue-700"
             >
                 Next
                 <svg

@@ -6,6 +6,7 @@ export type Theme = {
     green: string;
     brightGreen: string;
     white: string;
+    isDark: boolean;
 };
 
 export type Themes = Theme[];
