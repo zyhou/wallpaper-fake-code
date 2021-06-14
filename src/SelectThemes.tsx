@@ -71,9 +71,9 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     React.useEffect(() => {
         const handleUserKeyPress = (event: KeyboardEvent) => {
             const key = event.key.toLowerCase();
-            if (key === 'j') {
+            if (['j', 'arrowleft'].includes(key)) {
                 handleOnPrevTheme();
-            } else if (key === 'k') {
+            } else if (['k', 'arrowright'].includes(key)) {
                 handleOnNextTheme();
             }
         };
