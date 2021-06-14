@@ -106,12 +106,12 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 <div className="flex items-center flex-col md:flex-row space-y-5 md:space-y-0">
                     <button
                         onClick={handleOnClickResolution}
-                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-300 hover:bg-blue-500 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
+                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
                     >
                         {resolution.width}x{resolution.height} resolution
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 ml-4"
+                            className="h-6 w-6"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -126,11 +126,11 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                     </button>
                     <button
                         onClick={handleOnClickDownload}
-                        className="flex items-center text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
+                        className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
+                            className="h-5 w-5"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
@@ -145,11 +145,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 </div>
             </section>
             {showResolution && (
-                <section
-                    className={`${
-                        theme.isDark ? `bg-white text-black` : `bg-black text-white`
-                    } flex flex-col items-center py-8 mb-12`}
-                >
+                <section className="bg-white text-gray-700 flex flex-col items-center py-8 mb-12">
                     <p className="mb-5 font-bold">Pick a resolution</p>
                     <p className="mb-2">
                         Your screen resolution is{' '}

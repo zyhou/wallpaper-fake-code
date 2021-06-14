@@ -94,12 +94,10 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     });
 
     return (
-        <div className={`font-medium flex ${theme.isDark ? `text-black` : `text-white`}`}>
+        <div className="font-medium flex justify-center text-white">
             <button
                 onClick={handleOnPrevTheme}
-                className={`flex items-center rounded-l-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline ${
-                    theme.isDark ? `bg-white` : `bg-black`
-                }`}
+                className="flex items-center rounded-l-md p-3 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +116,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
                 Prev
             </button>
             <select
-                className={`cursor-pointer w-full ${theme.isDark ? `bg-white` : `bg-black`}`}
+                className="cursor-pointer w-full bg-blue-500 hover:bg-blue-700"
                 value={theme.name}
                 onChange={handleOnChange}
             >
@@ -133,9 +131,7 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
             </select>
             <button
                 onClick={handleOnNextTheme}
-                className={`flex items-center rounded-r-md px-2 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline ${
-                    theme.isDark ? `bg-white` : `bg-black`
-                }`}
+                className="flex items-center rounded-r-md p-3 my-0.5 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-blue-500 hover:bg-blue-700"
             >
                 Next
                 <svg
