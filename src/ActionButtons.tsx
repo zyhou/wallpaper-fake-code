@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from '@headlessui/react';
 
 import type { Resolution, Theme } from './types';
 import { SelectThemes } from './SelectThemes';
@@ -144,7 +145,15 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                     </button>
                 </div>
             </section>
-            {showResolution && (
+            <Transition
+                show={showResolution}
+                enter="transition-opacity duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity duration-300"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+            >
                 <section className="bg-white text-gray-700 flex flex-col items-center py-8 mb-12">
                     <p className="mb-5 font-bold">Pick a resolution</p>
                     <p className="mb-2">
@@ -190,7 +199,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                         })}
                     </div>
                 </section>
-            )}
+            </Transition>
         </div>
     );
 }
