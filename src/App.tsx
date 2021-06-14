@@ -103,7 +103,7 @@ export function App(): React.ReactElement {
                         href="https://twitter.com/rmaximedev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mx-1 text-blue-500 hover:text-blue-700 font-semibold"
+                        className="mx-1 text-blue-600 hover:text-blue-700 font-semibold"
                     >
                         @rmaximedev
                     </a>
