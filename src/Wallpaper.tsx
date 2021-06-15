@@ -8,7 +8,12 @@ type Properties = {
 
 export function Wallpaper({ theme }: Properties): React.ReactElement {
     return (
-        <svg id="wallpaper" version="1.1" viewBox="0 0 1000 400">
+        <svg
+            id="wallpaper"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1000 400"
+            className="w-full"
+        >
             <rect fill={theme.background} width="100%" height="100%" />
             <rect fill={theme.white} x="0" y="0" width="17" height="400" />
             <rect fill={theme.red} x="61" y="0" width="160" height="24" />
