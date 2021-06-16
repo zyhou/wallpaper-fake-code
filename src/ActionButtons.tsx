@@ -1,5 +1,7 @@
 import React from 'react';
 import { Transition } from '@headlessui/react';
+import { HexColorPicker, HexColorInput } from 'react-colorful';
+import { colord } from 'colord';
 
 import type { Resolution, Theme } from './types';
 import { SelectThemes } from './SelectThemes';
@@ -44,17 +46,113 @@ const resolutions: Map = {
     ],
 };
 
+type PropertiesResolutions = {
+    handleOnChangeResolution: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+function Resolutions({ handleOnChangeResolution }: PropertiesResolutions): React.ReactElement {
+    return (
+        <React.Fragment>
+            <p className="mb-5 font-bold">Pick a resolution</p>
+            <p className="mb-2">
+                Your screen resolution is{' '}
+                <span className="font-semibold">
+                    {window.screen.width}x{window.screen.height}
+                </span>
+                .
+            </p>
+            <div className="flex flex-col md:flex-row">
+                {Object.entries(resolutions).map(([name, resolutionsSizes]) => {
+                    return (
+                        <div key={name} className="flex flex-col">
+                            <span className="text-center font-bold">{name}</span>
+                            <div className="flex flex-wrap items-center mx-1 md:flex-col">
+                                {resolutionsSizes.map((resolutionsSize) => {
+                                    const formatResolution = `${resolutionsSize.width}x${resolutionsSize.height}`;
+                                    return (
+                                        <div key={formatResolution} className="w-full my-1.5">
+                                            <input
+                                                type="radio"
+                                                name="resolution-picker"
+                                                id={`form-${formatResolution}`}
+                                                value={formatResolution}
+                                                onChange={handleOnChangeResolution}
+                                                className="hidden"
+                                            />
+                                            <label
+                                                htmlFor={`form-${formatResolution}`}
+                                                className="block p-1 transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 text-white text-center rounded ring ring-blue"
+                                            >
+                                                {formatResolution}
+                                            </label>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </React.Fragment>
+    );
+}
+
+type PropertiesCustomTheme = {
+    theme: Theme;
+    setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
+
+function CustomTheme({ theme, setTheme }: PropertiesCustomTheme): React.ReactElement {
+    const setColor = (themeProps: keyof Theme) => (color: string) => {
+        setTheme((currentTheme) => ({
+            ...currentTheme,
+            [themeProps]: color,
+            isDark: themeProps === 'background' ? colord(color).isDark() : currentTheme.isDark,
+        }));
+    };
+
+    return (
+        <div className="flex flex-row items-center flex-wrap justify-center">
+            <span>background color</span>
+            <HexColorPicker color={theme.background} onChange={setColor('background')} />
+            <HexColorInput color={theme.background} onChange={setColor('background')} />
+
+            <span>red color</span>
+            <HexColorPicker color={theme.red} onChange={setColor('red')} />
+            <HexColorInput color={theme.red} onChange={setColor('red')} />
+
+            <span>green color</span>
+            <HexColorPicker color={theme.green} onChange={setColor('green')} />
+            <HexColorInput color={theme.green} onChange={setColor('green')} />
+
+            <span>white color</span>
+            <HexColorPicker color={theme.white} onChange={setColor('white')} />
+            <HexColorInput color={theme.white} onChange={setColor('white')} />
+
+            <span>brightRed color</span>
+            <HexColorPicker color={theme.brightRed} onChange={setColor('brightRed')} />
+            <HexColorInput color={theme.brightRed} onChange={setColor('brightRed')} />
+
+            <span>brightGreen color</span>
+            <HexColorPicker color={theme.brightGreen} onChange={setColor('brightGreen')} />
+            <HexColorInput color={theme.brightGreen} onChange={setColor('brightGreen')} />
+        </div>
+    );
+}
+
 type Properties = {
     theme: Theme;
     setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 };
+
+type Panel = 'resolution' | 'customTheme' | null;
 
 export function ActionButtons({ theme, setTheme }: Properties): React.ReactElement {
     const [resolution, setResolution] = React.useState<Resolution>({
         width: window.screen.width,
         height: window.screen.height,
     });
-    const [showResolution, setShowResolution] = React.useState<boolean>(false);
+    const [displayPanel, setDisplayPanel] = React.useState<Panel>(null);
 
     const handleOnClickDownload = () => {
         const svgElement = document.querySelector('#wallpaper') as SVGGraphicsElement;
@@ -92,7 +190,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
     };
 
     const handleOnClickResolution = () => {
-        setShowResolution((isResolutionShow) => !isResolutionShow);
+        setDisplayPanel((panel) => (panel === 'resolution' ? null : 'resolution'));
     };
 
     const handleOnChangeResolution = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,11 +198,16 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
         setResolution({ width: parseInt(width, 10), height: parseInt(height, 10) } as Resolution);
     };
 
+    const handleCustomTheme = () => {
+        setDisplayPanel((panel) => (panel === 'customTheme' ? null : 'customTheme'));
+    };
+
     return (
         <div>
             <section className="container flex flex-col justify-center items-center mx-auto mb-12 md:flex-row space-y-5 md:space-y-0">
                 <SelectThemes theme={theme} setTheme={setTheme} />
                 <div className="flex items-center flex-col md:flex-row space-y-5 md:space-y-0">
+                    <button onClick={handleCustomTheme}>custom theme</button>
                     <button
                         onClick={handleOnClickResolution}
                         className="w-64 flex items-center justify-around text-lg transition duration-300 ease-in-out focus:outline-none focus:ring bg-blue-600 hover:bg-blue-700 text-white font-normal p-3 rounded ring ring-blue md:mx-16"
@@ -121,7 +224,11 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
-                                d={showResolution ? `M5 15l7-7 7 7` : `M19 9l-7 7-7-7`}
+                                d={
+                                    displayPanel === 'resolution'
+                                        ? `M5 15l7-7 7 7`
+                                        : `M19 9l-7 7-7-7`
+                                }
                             />
                         </svg>
                     </button>
@@ -146,7 +253,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 </div>
             </section>
             <Transition
-                show={showResolution}
+                show={displayPanel !== null}
                 enter="transition-opacity duration-300"
                 enterFrom="opacity-0"
                 enterTo="opacity-100"
@@ -155,49 +262,12 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 leaveTo="opacity-0"
             >
                 <section className="bg-white text-gray-700 flex flex-col items-center py-8 mb-12">
-                    <p className="mb-5 font-bold">Pick a resolution</p>
-                    <p className="mb-2">
-                        Your screen resolution is{' '}
-                        <span className="font-semibold">
-                            {window.screen.width}x{window.screen.height}
-                        </span>
-                        .
-                    </p>
-                    <div className="flex flex-col md:flex-row">
-                        {Object.entries(resolutions).map(([name, resolutionsSizes]) => {
-                            return (
-                                <div key={name} className="flex flex-col">
-                                    <span className="text-center font-bold">{name}</span>
-                                    <div className="flex flex-wrap items-center mx-1 md:flex-col">
-                                        {resolutionsSizes.map((resolutionsSize) => {
-                                            const formatResolution = `${resolutionsSize.width}x${resolutionsSize.height}`;
-                                            return (
-                                                <div
-                                                    key={formatResolution}
-                                                    className="w-full my-1.5"
-                                                >
-                                                    <input
-                                                        type="radio"
-                                                        name="resolution-picker"
-                                                        id={`form-${formatResolution}`}
-                                                        value={formatResolution}
-                                                        onChange={handleOnChangeResolution}
-                                                        className="hidden"
-                                                    />
-                                                    <label
-                                                        htmlFor={`form-${formatResolution}`}
-                                                        className="block p-1 transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 text-white text-center rounded ring ring-blue"
-                                                    >
-                                                        {formatResolution}
-                                                    </label>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                    {displayPanel === 'resolution' && (
+                        <Resolutions handleOnChangeResolution={handleOnChangeResolution} />
+                    )}
+                    {displayPanel === 'customTheme' && (
+                        <CustomTheme theme={theme} setTheme={setTheme} />
+                    )}
                 </section>
             </Transition>
         </div>
