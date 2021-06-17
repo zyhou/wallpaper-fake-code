@@ -31,6 +31,7 @@
         "react": "17.0.2",
         "react-colorful": "^5.2.2",
         "react-dom": "17.0.2",
+        "react-laag": "^2.0.3",
         "react-router-dom": "^6.0.0-beta.0",
         "react-swipeable": "^6.1.2"
     },

@@ -78,9 +78,7 @@ export function App(): React.ReactElement {
                     className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
                     style={{ backgroundColor: theme.background }}
                 >
-                    <div className="flex mx-auto w-4/5 lg:w-3/5 xl:2/5">
-                        <Wallpaper theme={theme} />
-                    </div>
+                    <Wallpaper theme={theme} setTheme={setTheme} />
                 </section>
             </main>
             <footer className="flex justify-center items-center flex-wrap flex-col my-4 md:flex-row">
