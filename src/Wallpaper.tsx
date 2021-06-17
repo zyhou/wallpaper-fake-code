@@ -26,7 +26,12 @@ export function Rect({ onChangeColor, ...rectProps }: RectProperties): React.Rea
 
     return (
         <React.Fragment>
-            <rect {...rectProps} {...triggerProps} onClick={() => setOpen((open) => !open)} />
+            <rect
+                {...rectProps}
+                {...triggerProps}
+                onClick={() => setOpen((open) => !open)}
+                className="cursor-pointer pointer-events-none md:pointer-events-auto"
+            />
             {renderLayer(
                 <div>
                     {isOpen && (

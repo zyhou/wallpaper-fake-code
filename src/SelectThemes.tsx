@@ -85,22 +85,8 @@ export function SelectThemes({ theme, setTheme }: Properties): React.ReactElemen
     });
 
     const { ref } = useSwipeable({
-        onSwipedLeft: ({ event }) => {
-            const element = event.target as Element;
-            if (element.getAttribute('role') === 'slider') {
-                return;
-            }
-
-            handleOnNextTheme();
-        },
-        onSwipedRight: ({ event }) => {
-            const element = event.target as Element;
-            if (element.getAttribute('role') === 'slider') {
-                return;
-            }
-
-            handleOnPrevTheme();
-        },
+        onSwipedLeft: handleOnNextTheme,
+        onSwipedRight: handleOnPrevTheme,
     }) as { ref: React.RefCallback<Document> };
 
     React.useEffect(() => {
