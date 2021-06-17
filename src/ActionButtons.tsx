@@ -75,11 +75,11 @@ function Resolutions({ handleOnChangeResolution }: PropertiesResolutions): React
                                                 id={`form-${formatResolution}`}
                                                 value={formatResolution}
                                                 onChange={handleOnChangeResolution}
-                                                className="hidden"
+                                                className="hidden peer"
                                             />
                                             <label
                                                 htmlFor={`form-${formatResolution}`}
-                                                className="block p-1 transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 text-white text-center rounded ring ring-blue"
+                                                className="block p-1 transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 text-white text-center rounded ring ring-blue peer-checked:text-blue-700 peer-checked:bg-white peer-checked:hover:text-blue-700 peer-checked:hover:bg-white"
                                             >
                                                 {formatResolution}
                                             </label>

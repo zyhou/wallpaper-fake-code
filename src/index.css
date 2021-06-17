@@ -1,27 +1,8 @@
 @tailwind base;
 @tailwind components;
 
-input:checked + label {
-    @apply text-blue-700 bg-white;
-}
-
-input:checked + label:hover {
-    @apply text-blue-700 bg-white;
-}
-
 select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-}
-
-.input-color::before {
-    content: '#';
-    position: absolute;
-    left: 55px;
-    bottom: 21px;
-    width: 16px;
-    opacity: 0.4;
-    text-align: right;
-    pointer-events: none;
 }
 
 .react-colorful .react-colorful__last-control {

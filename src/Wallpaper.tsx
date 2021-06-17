@@ -38,7 +38,7 @@ export function Rect({ onChangeColor, ...rectProps }: RectProperties): React.Rea
                         <div {...layerProps}>
                             <HexColorPicker color={rectProps.fill} onChange={onChangeColor} />
                             <div className="p-4 bg-gray-900 text-white rounded-b-lg">
-                                <div className="input-color text-center">
+                                <div className="text-center before:content-['#'] before:absolute before:pointer-events-none before:opacity-50 before:w-6 before:bottom-5">
                                     <HexColorInput
                                         color={rectProps.fill}
                                         onChange={onChangeColor}
