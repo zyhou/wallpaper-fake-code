@@ -20,7 +20,6 @@ export function Rect({ onChangeColor, ...rectProps }: RectProperties): React.Rea
         onDisappear: close,
         overflowContainer: false,
         auto: true,
-        snap: true,
         triggerOffset: 10,
     });
 

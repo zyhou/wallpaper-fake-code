@@ -1,4 +1,7 @@
 import React from 'react';
+import { HexColorPicker, HexColorInput } from 'react-colorful';
+import { useLayer, Arrow } from 'react-laag';
+import { colord } from 'colord';
 
 import type { Theme } from './types';
 import { Wallpaper } from './Wallpaper';
@@ -8,6 +11,68 @@ const getTwitterUrl = () =>
     `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         `Thank you @rmaximedev for my new wallpaper 😍 #wallpaper`,
     )}`;
+
+type PropertiesBackgroundColorInput = {
+    theme: Theme;
+    setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
+
+function BackgroundColorInput({
+    theme,
+    setTheme,
+}: PropertiesBackgroundColorInput): React.ReactElement {
+    const [isOpen, setOpen] = React.useState<boolean>(false);
+    function close() {
+        setOpen(false);
+    }
+
+    const { renderLayer, triggerProps, layerProps, arrowProps } = useLayer({
+        isOpen,
+        onOutsideClick: close,
+        onDisappear: close,
+        overflowContainer: false,
+        placement: 'bottom-center',
+        triggerOffset: 10,
+    });
+
+    const onChangeColor = (color: string) => {
+        setTheme((currentTheme) => ({
+            ...currentTheme,
+            background: color,
+            isDark: colord(color).isDark(),
+        }));
+    };
+
+    return (
+        <React.Fragment>
+            <button
+                className="swatch"
+                style={{ backgroundColor: theme.background }}
+                onClick={() => setOpen((open) => !open)}
+                {...triggerProps}
+            />
+            {renderLayer(
+                <div>
+                    {isOpen && (
+                        <div {...layerProps}>
+                            <HexColorPicker color={theme.background} onChange={onChangeColor} />
+                            <div className="p-4 bg-gray-900 text-white rounded-b-lg">
+                                <div className="text-center before:content-['#'] before:absolute before:pointer-events-none before:opacity-50 before:w-6 before:bottom-5">
+                                    <HexColorInput
+                                        color={theme.background}
+                                        onChange={onChangeColor}
+                                        className="w-24 p-1 bg-gray-900 border-gray-700 border rounded text-center"
+                                    />
+                                </div>
+                            </div>
+                            <Arrow {...arrowProps} backgroundColor="rgba(17, 24, 39, 1)" />
+                        </div>
+                    )}
+                </div>,
+            )}
+        </React.Fragment>
+    );
+}
 
 export function App(): React.ReactElement {
     const [theme, setTheme] = React.useState<Theme>({
@@ -74,11 +139,25 @@ export function App(): React.ReactElement {
             </header>
             <main className="flex-grow mt-8">
                 <ActionButtons theme={theme} setTheme={setTheme} />
-                <section
-                    className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
-                    style={{ backgroundColor: theme.background }}
-                >
-                    <Wallpaper theme={theme} setTheme={setTheme} />
+                <section className="container flex flex-row justify-center items-center mx-auto mb-2 md:flex-row">
+                    background color:
+                    <BackgroundColorInput theme={theme} setTheme={setTheme} />
+                </section>
+                <section className="relative w-full">
+                    <div className="arrow">
+                        <img
+                            alt="Click to customize Arrow"
+                            src="/down-arrow.png"
+                            className={`mr-2 w-10 ${theme.isDark ? `invert` : `invert-0`}`}
+                        ></img>
+                        <span className="inline-block -translate-y-full">Click to customize</span>
+                    </div>
+                    <div
+                        className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
+                        style={{ backgroundColor: theme.background }}
+                    >
+                        <Wallpaper theme={theme} setTheme={setTheme} />
+                    </div>
                 </section>
             </main>
             <footer className="flex justify-center items-center flex-wrap flex-col my-4 md:flex-row">
