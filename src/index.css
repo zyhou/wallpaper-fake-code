@@ -6,7 +6,7 @@ select {
 }
 
 .react-colorful .react-colorful__last-control {
-    border-radius: 0px;
+    @apply rounded-none;
 }
 
 @tailwind utilities;

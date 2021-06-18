@@ -205,7 +205,7 @@ export function ActionButtons({ theme, setTheme }: Properties): React.ReactEleme
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <section className="bg-white text-gray-700 flex flex-col items-center py-8 mb-12">
+                <section className="bg-white text-gray-700 flex flex-col items-center py-8 mb-8">
                     <Resolutions handleOnChangeResolution={handleOnChangeResolution} />
                 </section>
             </Transition>

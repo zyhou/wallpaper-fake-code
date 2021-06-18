@@ -3,6 +3,7 @@ import React from 'react';
 import type { Theme } from './types';
 import { Wallpaper } from './Wallpaper';
 import { ActionButtons } from './ActionButtons';
+import { EditBackgroundColor } from './EditBackgroundColor';
 
 const getTwitterUrl = () =>
     `https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -74,6 +75,7 @@ export function App(): React.ReactElement {
             </header>
             <main className="flex-grow mt-8">
                 <ActionButtons theme={theme} setTheme={setTheme} />
+                <EditBackgroundColor theme={theme} setTheme={setTheme} />
                 <section
                     className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
                     style={{ backgroundColor: theme.background }}
