@@ -76,20 +76,16 @@ export function App(): React.ReactElement {
             <main className="flex-grow mt-8">
                 <ActionButtons theme={theme} setTheme={setTheme} />
                 <EditBackgroundColor theme={theme} setTheme={setTheme} />
-                {/* <div className="hidden md:flex md:ml-20 md:w-full lg:ml-40">
-                        <div className="animate-pulse text-lg flex items-center">
-                            <img
-                                alt="Click to customize arrow"
-                                src="/down-arrow.png"
-                                className={`mr-2 w-10 filter ${
-                                    theme.isDark ? `invert` : `invert-0`
-                                }`}
-                            ></img>
-                            <span className="inline-block -translate-y-full">
-                                Click to customize
-                            </span>
-                        </div>
-                    </div> */}
+                <div className="hidden md:flex md:ml-20 md:w-full lg:ml-40">
+                    <div className="animate-pulse text-lg flex items-center">
+                        <img
+                            alt="Click to customize arrow"
+                            src="/down-arrow.png"
+                            className={`mr-2 w-10 filter ${theme.isDark ? `invert` : `invert-0`}`}
+                        ></img>
+                        <span className="inline-block -translate-y-full">Click to customize</span>
+                    </div>
+                </div>
                 <section
                     className="container mx-auto flex items-center h-sm md:h-md lg:h-lg"
                     style={{ backgroundColor: theme.background }}
