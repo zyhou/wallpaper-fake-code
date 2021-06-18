@@ -79,7 +79,7 @@ export function EditBackgroundColor({ theme, setTheme }: Properties): React.Reac
     const [isOpen, setOpen] = React.useState<boolean>(false);
 
     return (
-        <section className="container hidden flex-row justify-center items-center mx-auto mb-2 md:flex">
+        <section className="container hidden flex-row justify-center items-center mx-auto md:flex">
             <div className="opacity-80 hover:opacity-100 flex items-center">
                 <button
                     className="cursor-pointer text-lg focus:outline-none"

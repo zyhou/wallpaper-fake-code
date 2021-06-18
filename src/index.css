@@ -9,15 +9,4 @@ select {
     @apply rounded-none;
 }
 
-.arrow {
-    position: absolute;
-    left: 12.5%;
-    top: 0px;
-    transform: translate(20px, 140%);
-    display: flex;
-    align-items: flex-end;
-    font-size: 21px;
-    @apply animate-pulse;
-}
-
 @tailwind utilities;
