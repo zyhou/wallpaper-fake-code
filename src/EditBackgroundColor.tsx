@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
 import { useLayer, Arrow } from 'react-laag';
 import { colord } from 'colord';

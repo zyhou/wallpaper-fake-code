@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 

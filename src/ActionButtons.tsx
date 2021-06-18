@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Transition } from '@headlessui/react';
 
 import type { Resolution, Theme } from './types';
