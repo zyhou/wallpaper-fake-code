@@ -60,6 +60,8 @@ type Properties = {
 };
 
 export function Wallpaper({ theme, setTheme }: Properties): React.ReactElement {
+    const [displayArrow, setDisplayArrow] = React.useState(true);
+
     const onChange = (themeKey: keyof Theme) => (color: string) => {
         setTheme((currentTheme) => ({
             ...currentTheme,
@@ -67,9 +69,29 @@ export function Wallpaper({ theme, setTheme }: Properties): React.ReactElement {
         }));
     };
 
+    const handleOnCustomize = () => {
+        setDisplayArrow(false);
+    };
+
     return (
         <React.Fragment>
-            <div className="flex mx-auto w-4/5 lg:w-3/5 xl:2/5">
+            <div
+                className="flex mx-auto relative w-4/5 lg:w-3/5 xl:2/5"
+                onClick={handleOnCustomize}
+                aria-hidden="true"
+            >
+                <div
+                    className={`hidden absolute -top-16 -left-4 ${displayArrow ? `md:block ` : ``}`}
+                >
+                    <div className="animate-pulse text-lg flex items-center">
+                        <img
+                            alt="Click to customize arrow"
+                            src="/down-arrow.png"
+                            className={`mr-2 w-10 filter ${theme.isDark ? `invert` : `invert-0`}`}
+                        ></img>
+                        <span className="inline-block -translate-y-full">Click to customize</span>
+                    </div>
+                </div>
                 <svg
                     id="wallpaper"
                     xmlns="http://www.w3.org/2000/svg"
